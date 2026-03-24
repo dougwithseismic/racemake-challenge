@@ -8,8 +8,8 @@
     ".": "./src/index.ts"
   },
   "scripts": {
-    "start": "bun run src/challenge.ts",
-    "dev": "bun run --watch src/challenge.ts",
+    "start": "bun run src/solution/challenge.ts",
+    "dev": "bun run --watch src/solution/challenge.ts",
     "check-types": "tsc --noEmit"
   },
   "devDependencies": {
