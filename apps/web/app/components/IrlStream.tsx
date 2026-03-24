@@ -18,7 +18,7 @@ type StreamEvent =
   | { type: "lap_skipped"; data: LapSkipped }
   | { type: "done"; data: Done };
 
-export function IrlStream() {
+export function IrlStream({ streamUrl = "/api/v2/irl/stream" }: { streamUrl?: string }) {
   const [connected, setConnected] = useState(false);
   const [events, setEvents] = useState<StreamEvent[]>([]);
   const [latestFrame, setLatestFrame] = useState<Frame | null>(null);
@@ -45,7 +45,7 @@ export function IrlStream() {
     setFrameCount(0);
     setConnected(true);
 
-    const es = new EventSource("/api/v2/irl/stream");
+    const es = new EventSource(streamUrl);
     esRef.current = es;
 
     es.addEventListener("frame", (e) => {

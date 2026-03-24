@@ -115,6 +115,8 @@ const projects = [
 ];
 
 export default function Home() {
+  const apiUrl = process.env.API_URL || "";
+  const streamUrl = apiUrl ? `${apiUrl}/api/v2/irl/stream` : "/api/v2/irl/stream";
   return (
     <main>
       {/* ── Hero ── */}
@@ -193,7 +195,7 @@ export default function Home() {
 
         {/* Live SSE Stream */}
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 pt-6">
-          <IrlStream />
+          <IrlStream streamUrl={streamUrl} />
         </div>
 
         {/* Codec Comparison */}
