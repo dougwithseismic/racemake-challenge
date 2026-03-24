@@ -23,9 +23,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const apiDocsUrl = process.env.API_URL
-    ? `${process.env.API_URL}/docs`
-    : "http://localhost:3001/docs";
+  const apiDocsUrl = "/docs";
 
   const links = [
     ["#easy", "Challenge 1"],

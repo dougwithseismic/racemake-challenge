@@ -105,7 +105,7 @@ const projects = [
   {
     name: "dezlock-dump", subtitle: "Runtime Schema Extraction",
     badges: [["C++", "lime"]] as [string, "lime"][],
-    desc: "82 commits, built from scratch. Runtime RTTI and schema extraction for Source 2 games. Auto-generates typed C++ headers (2,400+ structs, 229 entity classes), complete JSON exports, and signature scanning across 58+ DLLs. The foundation that makes patch-proof telemetry pipelines possible.",
+    desc: "Runtime RTTI and schema extraction for Source 2 games. Auto-generates typed C++ headers (2,400+ structs, 229 entity classes), complete JSON exports, and signature scanning across 58+ DLLs. The foundation that makes patch-proof telemetry pipelines possible.",
     links: [{ label: "Source Code", url: "https://github.com/dougwithseismic/dezlock-dump" }],
   },
 ];

@@ -166,7 +166,7 @@ I built this exact system for Source 2 games. Instead of hardcoding offsets that
 
 4. **Ship it downstream** — The extracted schema feeds directly into SDK generators, producing typed C++ headers (2,400+ structs, 229 entity classes) and complete JSON exports for tooling consumers.
 
-This is what [dezlock-dump](https://github.com/dougwithseismic/dezlock-dump) does. 82 commits, built from scratch.
+This is what [dezlock-dump](https://github.com/dougwithseismic/dezlock-dump) does.
 
 ### Applied to Racing Telemetry
 
