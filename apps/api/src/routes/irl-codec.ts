@@ -304,7 +304,15 @@ codec.get("/roundtrip", (c) => {
 });
 
 codec.post("/encode", async (c) => {
-  const frames = await c.req.json<TelemetryFrame[]>();
+  let frames: TelemetryFrame[];
+  try {
+    frames = await c.req.json();
+  } catch {
+    return c.json({ error: "Invalid JSON body" }, 400);
+  }
+  if (!Array.isArray(frames)) {
+    return c.json({ error: "Expected an array of telemetry frames" }, 400);
+  }
   const encoded = frames.map((f) => {
     const buf = encodeFrame(f);
     return Array.from(buf).map((b) => b.toString(16).padStart(2, "0")).join("");
@@ -319,8 +327,19 @@ codec.post("/encode", async (c) => {
 });
 
 codec.post("/decode", async (c) => {
-  const { hex } = await c.req.json<{ hex: string[] }>();
-  const decoded = hex.map((h) => {
+  let body: { hex: string[] };
+  try {
+    body = await c.req.json();
+  } catch {
+    return c.json({ error: "Invalid JSON body" }, 400);
+  }
+  if (!body.hex || !Array.isArray(body.hex)) {
+    return c.json({ error: "Expected { hex: string[] }" }, 400);
+  }
+  const decoded = body.hex.map((h) => {
+    if (typeof h !== "string" || h.length === 0 || h.length % 2 !== 0 || !/^[0-9a-fA-F]+$/.test(h)) {
+      throw new Error(`Invalid hex string: "${h}"`);
+    }
     const bytes = new Uint8Array(h.match(/.{2}/g)!.map((b) => parseInt(b, 16)));
     return decodeFrame(bytes);
   });

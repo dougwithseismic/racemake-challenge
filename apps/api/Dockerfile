@@ -24,14 +24,19 @@ WORKDIR /app
 
 RUN corepack enable && corepack prepare pnpm@9.0.0 --activate
 
-# Copy everything
+# Copy dependency artifacts
 COPY --from=deps /app/node_modules ./node_modules
 COPY --from=deps /app/apps/api/node_modules ./apps/api/node_modules
 COPY --from=deps /app/packages/ ./packages/
-COPY . .
 
-# Install tsx globally via npm (pnpm global bin is fiddly in containers)
-RUN npm install -g tsx
+# Copy source code for all workspace packages
+COPY packages/challenge-easy/ ./packages/challenge-easy/
+COPY packages/challenge-hard/ ./packages/challenge-hard/
+COPY packages/typescript-config/ ./packages/typescript-config/
+COPY apps/api/ ./apps/api/
+
+# Install tsx globally for TypeScript execution
+RUN corepack enable && pnpm add -g tsx
 
 ENV PORT=3000
 EXPOSE 3000

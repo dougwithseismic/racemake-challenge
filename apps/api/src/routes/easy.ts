@@ -40,7 +40,15 @@ easy.get("/stint", (c) => {
 
 // POST /analyze — analyze custom lap data against reference
 easy.post("/analyze", async (c) => {
-  const body = await c.req.json<{ reference?: ReferenceLap; driver: DriverLap }>();
+  let body: { reference?: ReferenceLap; driver: DriverLap };
+  try {
+    body = await c.req.json();
+  } catch {
+    return c.json({ error: "Invalid JSON body" }, 400);
+  }
+  if (!body.driver) {
+    return c.json({ error: "Missing required field: driver" }, 400);
+  }
   const ref = body.reference ?? referenceLap;
   const analysis = analyzeLap(ref, body.driver);
   const coaching = generateCoaching(analysis, config);
@@ -49,7 +57,15 @@ easy.post("/analyze", async (c) => {
 
 // POST /stint — analyze custom stint data
 easy.post("/stint", async (c) => {
-  const body = await c.req.json<{ reference?: ReferenceLap; laps: DriverLap[] }>();
+  let body: { reference?: ReferenceLap; laps: DriverLap[] };
+  try {
+    body = await c.req.json();
+  } catch {
+    return c.json({ error: "Invalid JSON body" }, 400);
+  }
+  if (!body.laps || !Array.isArray(body.laps)) {
+    return c.json({ error: "Missing required field: laps (array)" }, 400);
+  }
   const ref = body.reference ?? referenceLap;
   const stint = analyzeStint(ref, body.laps, config);
   return c.json({ stint });

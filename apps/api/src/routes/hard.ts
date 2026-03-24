@@ -20,7 +20,12 @@ let frames: TelemetryFrame[] = [];
 
 // POST /ingest — accept raw telemetry
 hard.post("/ingest", async (c) => {
-  const body = await c.req.json<TelemetryFrame[]>();
+  let body: TelemetryFrame[];
+  try {
+    body = await c.req.json();
+  } catch {
+    return c.json({ error: "Invalid JSON body" }, 400);
+  }
   if (!Array.isArray(body)) {
     return c.json({ error: "Expected an array of telemetry frames" }, 400);
   }

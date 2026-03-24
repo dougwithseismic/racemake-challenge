@@ -21,6 +21,22 @@
 
 ---
 
+## Important Links
+
+| Resource | URL |
+|---|---|
+| **API Documentation (Scalar)** | [racemake-challenge-production.up.railway.app/docs](https://racemake-challenge-production.up.railway.app/docs) |
+| **Live API Base** | [racemake-challenge-production.up.railway.app](https://racemake-challenge-production.up.railway.app) |
+| **OpenAPI Spec** | [racemake-challenge-production.up.railway.app/openapi.json](https://racemake-challenge-production.up.railway.app/openapi.json) |
+| **Source Code** | [github.com/dougwithseismic/racemake-challenge](https://github.com/dougwithseismic/racemake-challenge) |
+| **dezlock-dump** (Runtime Schema Extraction) | [github.com/dougwithseismic/dezlock-dump](https://github.com/dougwithseismic/dezlock-dump) |
+| **arc-probe** (AI Process Inspector) | [github.com/vzco/arc-probe](https://github.com/vzco/arc-probe) |
+| **s2-framework** (RL Bot Platform) | [github.com/dougwithseismic/s2-framework](https://github.com/dougwithseismic/s2-framework) |
+
+> API built with **Hono v4** + **Scalar** docs UI. Runs on Bun locally, deployed to Railway via Node/tsx.
+
+---
+
 ## Structure
 
 Turborepo monorepo. Each challenge is a self-contained package.

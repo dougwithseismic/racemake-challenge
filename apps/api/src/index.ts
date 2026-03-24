@@ -10,8 +10,18 @@ import { codec } from "./routes/irl-codec.js";
 const app = new Hono();
 
 // Middleware
-app.use("*", cors());
+app.use("*", cors({
+  origin: process.env.CORS_ORIGIN ?? "*",
+  allowMethods: ["GET", "POST", "OPTIONS"],
+  allowHeaders: ["Content-Type"],
+}));
 app.use("*", logger());
+
+// Global error handler
+app.onError((err, c) => {
+  console.error(`[API Error] ${err.message}`);
+  return c.json({ error: err.message || "Internal server error" }, 500);
+});
 
 // Root
 app.get("/", (c) => {
@@ -269,7 +279,7 @@ export default {
 };
 
 // Node.js fallback
-if (typeof globalThis.Bun === "undefined") {
+if (typeof (globalThis as Record<string, unknown>).Bun === "undefined") {
   import("@hono/node-server").then(({ serve }) => {
     serve({ fetch: app.fetch, port: PORT }, (info) => {
       console.log(`RACEMAKE API running on http://localhost:${info.port}`);
