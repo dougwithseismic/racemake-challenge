@@ -5,6 +5,7 @@ import { apiReference } from "@scalar/hono-api-reference";
 import { easy } from "./routes/easy.js";
 import { hard } from "./routes/hard.js";
 import { irl } from "./routes/irl.js";
+import { codec } from "./routes/irl-codec.js";
 
 const app = new Hono();
 
@@ -36,8 +37,14 @@ app.get("/", (c) => {
         "GET /api/v2/hard/data": "Raw telemetry data",
       },
       irl: {
-        "GET /api/v2/irl/": "Architecture overview",
+        "GET /api/v2/irl": "Architecture overview",
         "GET /api/v2/irl/stream": "SSE stream — real-time telemetry replay",
+        "GET /api/v2/irl/codec": "Wire format codec overview",
+        "GET /api/v2/irl/codec/schemas": "Versioned schema registry",
+        "GET /api/v2/irl/codec/compare": "JSON vs binary vs delta-encoded size comparison",
+        "GET /api/v2/irl/codec/roundtrip": "Encode→decode roundtrip proof for all frames",
+        "POST /api/v2/irl/codec/encode": "Encode JSON telemetry to binary (hex)",
+        "POST /api/v2/irl/codec/decode": "Decode binary (hex) back to JSON",
       },
     },
   });
@@ -247,6 +254,7 @@ app.get(
 app.route("/api/v2/easy", easy);
 app.route("/api/v2/hard", hard);
 app.route("/api/v2/irl", irl);
+app.route("/api/v2/irl/codec", codec);
 
 // ============================================================
 // SERVER
