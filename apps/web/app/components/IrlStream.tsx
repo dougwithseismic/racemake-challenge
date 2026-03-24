@@ -3,7 +3,7 @@
 import { useState, useRef, useCallback, useEffect } from "react";
 import { TrackMap } from "./TrackMap";
 
-interface Frame { ts: number; lap: number; pos: number; spd: number; sector: number }
+interface Frame { ts: number; lap: number; pos: number; spd: number; thr: number; brk: number; str: number; gear: number; rpm: number; sector: number }
 interface Sector { lap: number; sector: number; time: number; frames: number; maxSpeed: number; avgThrottle: number }
 interface LapComplete { lapNumber: number; lapTime: number; sectors: { sector: number; time: number }[]; avgSpeed: number; maxSpeed: number }
 interface Coaching { bestLap: number; worstLap: number; problemSector: number; issue: string; delta: number; coachingMessage: string }
@@ -138,6 +138,10 @@ export function IrlStream({ streamUrl = "/api/v2/irl/stream" }: { streamUrl?: st
           speed={latestFrame?.spd ?? 0}
           sector={latestFrame?.sector ?? 1}
           lap={latestFrame?.lap ?? 0}
+          gear={latestFrame?.gear}
+          throttle={latestFrame?.thr}
+          brake={latestFrame?.brk}
+          rpm={latestFrame?.rpm}
           active={connected}
         />
 

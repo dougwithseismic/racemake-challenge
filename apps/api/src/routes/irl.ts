@@ -167,6 +167,11 @@ irl.get("/stream", (c) => {
           lap: frame.lap,
           pos: frame.pos,
           spd: frame.spd,
+          thr: frame.thr,
+          brk: frame.brk,
+          str: frame.str,
+          gear: frame.gear,
+          rpm: frame.rpm,
           sector,
         }),
       });
