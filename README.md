@@ -93,6 +93,7 @@ Edge cases handled:
 - **Incomplete lap excluded** — lap 4 only has S1 data
 - **Stationary frames filtered** — speed < 5 with unchanged position
 - **Issue detection** — tyre overheat (>110C) correctly identified in lap 3 S2
+- **Sector boundary interpolation** — At 10Hz, frames are ~3.2s apart. A naive approach (measuring time within each sector's frames) loses the inter-sector gap — **6.4 seconds per lap** goes unaccounted for and sectors don't sum to lap time. We interpolate the exact boundary crossing time between the two frames straddling each sector line, so S1 + S2 + S3 = lapTime exactly.
 
 ---
 
