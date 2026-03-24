@@ -32,3 +32,41 @@
   }
   a { color: inherit; text-decoration: none; }
 }
+
+/* Hero wrapper responsive height */
+.app-hero-wrapper {
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .app-hero-wrapper {
+    min-height: auto;
+    height: 100vh;
+  }
+}
+
+/* Video blend mode override */
+.video-plus-darker {
+  mix-blend-mode: normal !important;
+}
+
+/* Hero description group margin */
+.hero-description-group {
+  margin-right: 0;
+}
+
+.hero-stat-group {
+  margin-right: 0;
+}
+
+@media (min-width: 768px) {
+  .hero-description-group {
+    margin-right: 50%;
+  }
+
+  .hero-stat-group {
+    margin-right: 20%;
+    justify-content: center;
+  }
+}
