@@ -56,8 +56,9 @@ Enjoyed the challenge — hope you don't mind I ran with it. Shout me on LinkedI
 
 | Resource | URL |
 |---|---|
+| **Live Web App** | [racemake-challenge.up.railway.app](https://racemake-challenge.up.railway.app) |
 | **API Documentation (Scalar)** | [racemake-challenge.up.railway.app/docs](https://racemake-challenge.up.railway.app/docs) |
-| **Live API Base** | [racemake-challenge.up.railway.app](https://racemake-challenge.up.railway.app) |
+| **Live API Base** | [racemake-challenge.up.railway.app/api/v2](https://racemake-challenge.up.railway.app/api/v2) |
 | **OpenAPI Spec** | [racemake-challenge.up.railway.app/openapi.json](https://racemake-challenge.up.railway.app/openapi.json) |
 | **Source Code** | [github.com/dougwithseismic/racemake-challenge](https://github.com/dougwithseismic/racemake-challenge) |
 | **dezlock-dump** (Runtime Schema Extraction) | [github.com/dougwithseismic/dezlock-dump](https://github.com/dougwithseismic/dezlock-dump) |
