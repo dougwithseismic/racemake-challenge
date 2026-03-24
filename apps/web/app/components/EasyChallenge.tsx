@@ -153,30 +153,32 @@ export function EasyChallenge() {
                 </div>
               ))}
             </div>
-            <table className="w-full font-mono text-[13px] border-collapse">
+            <div className="overflow-x-auto">
+            <table className="w-full font-mono text-[13px] border-collapse min-w-[500px]">
               <thead>
                 <tr>
                   {["Sector", "Issue", "Trend", "Lap 1", "Lap 14"].map((h, i) => (
-                    <th key={h} className={`${i >= 3 ? "text-right" : "text-left"} px-6 py-3 text-[10px] font-semibold tracking-widest uppercase text-t4 border-b border-border`}>{h}</th>
+                    <th key={h} className={`${i >= 3 ? "text-right" : "text-left"} px-4 sm:px-6 py-3 text-[10px] font-semibold tracking-widest uppercase text-t4 border-b border-border`}>{h}</th>
                   ))}
                 </tr>
               </thead>
               <tbody className="text-t2">
                 {s.trends.map((t) => (
                   <tr key={t.sector}>
-                    <td className="px-6 py-3 border-b border-border">S{t.sector}</td>
-                    <td className="px-6 py-3 border-b border-border">{t.issue.replace("_", " ")}</td>
-                    <td className="px-6 py-3 border-b border-border">
+                    <td className="px-4 sm:px-6 py-3 border-b border-border">S{t.sector}</td>
+                    <td className="px-4 sm:px-6 py-3 border-b border-border">{t.issue.replace("_", " ")}</td>
+                    <td className="px-4 sm:px-6 py-3 border-b border-border">
                       <span className={`font-mono text-[10px] font-semibold tracking-wider uppercase px-2 py-0.5 border ${trendColors[t.trend]}`}>
                         {trendArrows[t.trend]} {t.trend}
                       </span>
                     </td>
-                    <td className="text-right px-6 py-3 border-b border-border text-danger tabular-nums">+{t.deltaProgression[0]?.toFixed(3)}s</td>
-                    <td className="text-right px-6 py-3 border-b border-border text-danger tabular-nums">+{t.deltaProgression[t.deltaProgression.length - 1]?.toFixed(3)}s</td>
+                    <td className="text-right px-4 sm:px-6 py-3 border-b border-border text-danger tabular-nums">+{t.deltaProgression[0]?.toFixed(3)}s</td>
+                    <td className="text-right px-4 sm:px-6 py-3 border-b border-border text-danger tabular-nums">+{t.deltaProgression[t.deltaProgression.length - 1]?.toFixed(3)}s</td>
                   </tr>
                 ))}
               </tbody>
             </table>
+            </div>
             <div className="p-5">
               <div className="p-5 bg-black border border-border border-l-2 border-l-lime relative italic text-sm font-light text-t2 leading-relaxed">
                 <span className="absolute -top-2.5 left-4 font-mono text-[10px] font-semibold tracking-widest text-lime bg-bg px-2 not-italic uppercase">PitGPT</span>

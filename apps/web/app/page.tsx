@@ -116,18 +116,18 @@ export default function Home() {
       {/* ── Hero ── */}
       <section className="border-b border-border">
         <div className="grid grid-cols-12 gap-px bg-border">
-          <div className="col-span-12 lg:col-span-8 bg-bg p-12 lg:p-16 flex flex-col justify-center min-h-[400px]">
+          <div className="col-span-12 lg:col-span-8 bg-bg p-6 sm:p-12 lg:p-16 flex flex-col justify-center min-h-[300px] sm:min-h-[400px]">
             <p className="font-mono text-[11px] tracking-[0.15em] uppercase text-lime mb-6">Racemake / Product Engineer Challenge</p>
-            <h1 className="text-4xl lg:text-[56px] font-light leading-[1.05] tracking-tight mb-6">
+            <h1 className="text-3xl sm:text-4xl lg:text-[56px] font-light leading-[1.05] tracking-tight mb-6">
               Your AI<br /><strong className="font-semibold">Race Engineer</strong>
             </h1>
             <p className="text-base font-light text-t2 leading-relaxed max-w-[520px]">
               PitGPT analyzes sim racing telemetry and delivers real-time coaching feedback. Two challenges solved — from debugging a sort comparator to building a telemetry API from raw 10Hz frames.
             </p>
           </div>
-          <div className="col-span-12 lg:col-span-4 bg-bg flex flex-row lg:flex-col">
+          <div className="col-span-12 lg:col-span-4 bg-bg grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-1">
             {[["Track", "Spa-Francorchamps"], ["Car", "Porsche 963 LMdh"], ["Conditions", "Dry, 24°C Track"], ["Telemetry", "10Hz Sample Rate"]].map(([label, value]) => (
-              <div key={label} className="flex-1 px-6 py-5 flex flex-col justify-center border-b border-l lg:border-l-0 border-border last:border-b-0">
+              <div key={label} className="px-6 py-5 flex flex-col justify-center border-b border-border last:border-b-0 sm:border-l lg:border-l-0">
                 <p className="font-mono text-[10px] tracking-wider uppercase text-t4 mb-1">{label}</p>
                 <p className="font-mono text-sm text-t2">{value}</p>
               </div>
@@ -138,11 +138,11 @@ export default function Home() {
 
       {/* ── Challenge 1 ── */}
       <section id="easy" className="border-b border-border">
-        <div className="max-w-[1200px] mx-auto px-6">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
           <SectionHeader label="Challenge 1 — Easy" labelColor="text-lime" title="Telemetry Analysis Pipeline" desc="Sector-level analysis comparing driver laps against a reference. Three levels: fix a bug, extend to stint analysis, think about scale." />
           <EasyChallenge />
         </div>
-        <div className="max-w-[1200px] mx-auto px-6 pb-12 mt-px">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 pb-12 mt-px">
           <div className="border border-border border-b-0 bg-bg">
             <CardHeader title="Level 3 — What breaks at scale" badge={<Badge color="info">Architecture</Badge>} />
           </div>
@@ -152,11 +152,11 @@ export default function Home() {
 
       {/* ── Challenge 2 ── */}
       <section id="hard" className="border-b border-border">
-        <div className="max-w-[1200px] mx-auto px-6">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
           <SectionHeader label="Challenge 2 — Hard" labelColor="text-warn" title="Raw Telemetry API" desc="Three API endpoints from raw 10Hz telemetry. Ingest, compute lap summaries with sector splits, generate coaching — handling edge cases." />
           <HardChallenge />
         </div>
-        <div className="max-w-[1200px] mx-auto px-6 pb-12 mt-px">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 pb-12 mt-px">
           <div className="border border-border border-b-0 bg-bg">
             <CardHeader title="Implementation" />
           </div>
@@ -168,7 +168,7 @@ export default function Home() {
 
       {/* ── Architecture ── */}
       <section id="architecture" className="border-b border-border">
-        <div className="max-w-[1200px] mx-auto px-6">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
           <SectionHeader label="Beyond the Challenge" labelColor="text-info" title="Production Architecture" desc="The API includes a working IRL section with streaming telemetry, a binary wire format codec, and a versioned schema registry." />
           <ContentGrid>
             {[
@@ -188,10 +188,11 @@ export default function Home() {
         </div>
 
         {/* Wire format table */}
-        <div className="max-w-[1200px] mx-auto px-6 pt-6">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 pt-6">
           <div className="border border-border bg-bg">
             <CardHeader title="Wire Format — Why JSON Telemetry is Wild" badge={<Badge color="warn">Bandwidth</Badge>} />
-            <table className="w-full font-mono text-[13px] border-collapse">
+            <div className="overflow-x-auto">
+            <table className="w-full font-mono text-[13px] border-collapse min-w-[500px]">
               <thead>
                 <tr>
                   <th className="text-left px-6 py-3 text-[10px] font-semibold tracking-widest uppercase text-t4 border-b border-border">Format</th>
@@ -206,6 +207,7 @@ export default function Home() {
                 <tr><td className="px-6 py-3">Delta-encoded (v2)</td><td className="px-6 py-3">~6 bytes avg</td><td className="text-right px-6 py-3">~14 KB/s</td><td className="text-right px-6 py-3 text-lime">95.4%</td></tr>
               </tbody>
             </table>
+            </div>
           </div>
           <p className="text-sm font-light text-t3 leading-relaxed mt-4 max-w-[800px]">
             Raw JSON at 120Hz repeats field names every frame. In production you&apos;d use Protobuf or FlatBuffers — this is a from-scratch implementation to demonstrate the principles. Versioned schema registry means game patches don&apos;t break consumers.
@@ -213,10 +215,10 @@ export default function Home() {
         </div>
 
         {/* API endpoints */}
-        <div className="max-w-[1200px] mx-auto px-6 pt-4 pb-12">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 pt-4 pb-12">
           <div className="border border-border bg-black">
-            <div className="flex justify-between px-5 py-3 border-b border-border font-mono text-[11px] tracking-wider uppercase text-t4">
-              <span>API Endpoints — IRL</span><span>Hono + Bun</span>
+            <div className="flex justify-between px-4 sm:px-5 py-3 border-b border-border font-mono text-[11px] tracking-wider uppercase text-t4">
+              <span>API Endpoints — IRL</span><span className="hidden sm:inline">Hono + Bun</span>
             </div>
             <pre className="p-5 font-mono text-[13px] leading-loose text-t2 overflow-x-auto">
 {`GET  /api/v2/irl               Architecture overview
@@ -232,12 +234,12 @@ POST /api/v2/irl/codec/decode   Binary (hex) → JSON`}</pre>
 
       {/* ── IRL: Reverse Engineering ── */}
       <section id="irl" className="border-b border-border">
-        <div className="max-w-[1200px] mx-auto px-6">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
           <SectionHeader label="IRL Challenge" labelColor="text-lime" title="Reverse Engineering & Telemetry Pipelines" desc='The job listing says "debug and fix telemetry format changes from game updates rapidly." Here&apos;s how I&apos;d actually do it — and have been doing it.' />
         </div>
 
         {/* Problem / Solution */}
-        <div className="max-w-[1200px] mx-auto px-6">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
           <div className="border border-border bg-bg p-6 mb-6">
             <p className="font-mono text-[11px] font-semibold tracking-wider uppercase text-t4 mb-3">The Problem</p>
             <p className="text-sm font-light text-t2 leading-relaxed">
@@ -259,7 +261,7 @@ POST /api/v2/irl/codec/decode   Binary (hex) → JSON`}</pre>
         </div>
 
         {/* Applied to racing */}
-        <div className="max-w-[1200px] mx-auto px-6 pt-6">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 pt-6">
           <div className="border border-border bg-black">
             <div className="flex justify-between px-5 py-3 border-b border-border font-mono text-[11px] tracking-wider uppercase text-t4">
               <span>Applied to Racing Telemetry</span><span>Same Pattern</span>
@@ -275,10 +277,11 @@ POST /api/v2/irl/codec/decode   Binary (hex) → JSON`}</pre>
         </div>
 
         {/* Tooling table */}
-        <div className="max-w-[1200px] mx-auto px-6 pt-6">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 pt-6">
           <div className="border border-border bg-bg">
             <CardHeader title="Tooling — Built from scratch" badge={<Badge color="lime">Open Source</Badge>} />
-            <table className="w-full font-mono text-[13px] border-collapse">
+            <div className="overflow-x-auto">
+            <table className="w-full font-mono text-[13px] border-collapse min-w-[500px]">
               <thead>
                 <tr>
                   <th className="text-left px-6 py-3 text-[10px] font-semibold tracking-widest uppercase text-t4 border-b border-border">Tool</th>
@@ -296,11 +299,12 @@ POST /api/v2/irl/codec/decode   Binary (hex) → JSON`}</pre>
                 ))}
               </tbody>
             </table>
+            </div>
           </div>
         </div>
 
         {/* Optimal Approaches */}
-        <div className="max-w-[1200px] mx-auto px-6 pt-6 pb-12">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 pt-6 pb-12">
           <div className="border border-border border-b-0 bg-bg">
             <CardHeader title="Optimal Approaches" badge={<Badge color="info">Production</Badge>} />
           </div>
@@ -310,24 +314,24 @@ POST /api/v2/irl/codec/decode   Binary (hex) → JSON`}</pre>
 
       {/* ── Portfolio ── */}
       <section id="portfolio" className="border-b border-border">
-        <div className="max-w-[1200px] mx-auto px-6">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
           <SectionHeader label="Previous Work" labelColor="text-warn" title="Relevant Projects" desc="Gaming tools, reverse engineering, and AI — the intersection where I've been building for the last few years." />
         </div>
 
-        <div className="max-w-[1200px] mx-auto px-6 pb-12">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 pb-12">
           <div className="flex flex-col gap-px bg-border border border-border">
             {projects.map((p) => (
               <div key={p.name} className="bg-bg">
-                <div className="flex items-center justify-between px-6 py-4 border-b border-border">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between px-4 sm:px-6 py-4 border-b border-border gap-2">
                   <div>
                     <p className="font-mono text-sm font-semibold text-t1">{p.name}</p>
                     <p className="font-mono text-[11px] text-t3">{p.subtitle}</p>
                   </div>
                   <div className="flex gap-1">{p.badges.map(([label, color]) => <Badge key={label} color={color}>{label}</Badge>)}</div>
                 </div>
-                <div className="px-6 py-5">
+                <div className="px-4 sm:px-6 py-5">
                   <p className="text-sm font-light text-t2 leading-relaxed mb-4">{p.desc}</p>
-                  <div className="flex gap-2">
+                  <div className="flex flex-wrap gap-2">
                     {p.links.map((l) => (
                       <a key={l.label} href={l.url} target="_blank" rel="noopener noreferrer"
                         className="font-mono text-[11px] font-medium tracking-wider uppercase px-4 py-2 border border-border bg-bg text-t2 hover:text-t1 hover:bg-surface transition-colors">
